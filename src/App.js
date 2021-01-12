@@ -1,56 +1,64 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import logo from './assets/logo.png';
+import shirt from './assets/shirt.jpg';
+import belt from './assets/belt.jpg';
+import ProductsCarousel from './components/Carousel.js';
+import CustomizedSelector from './components/Selector.js';
+import { Button } from 'antd';
 import './App.css';
 
-function App() {
+// Version avec classes :
+// import Product from './app/product.js';
+// import Showcase from './app/showcase.js';
+
+const App = () => {
+
+  let serial = 0
+  const products = [
+    {
+      id: toString(++serial),
+      title: "Chemise",
+      picture: shirt,
+      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+      colors: ["Blanc", "Bleu ciel", "Anthracite"]
+    },
+    {
+      id: toString(++serial),
+      title: "Ceinture",
+      picture: belt,
+      sizes: [36, 38, 40, 42, 44],
+      colors: ["Marron", "Noir"]
+    }
+  ]
+
+  /* Version avec classes :
+  let showcase = new Showcase([
+    new Product(
+      "Chemise",
+      shirt,
+      ["XS", "S", "M", "L", "XL", "XXL"],
+      ["Blanc", "Bleu ciel", "Anthracite"]
+      ),
+    new Product(
+      "Ceinture",
+      belt,
+      [36, 38, 40, 42, 44],
+      ["Marron", "Noir"]
+    )])
+  console.log("Showcase", showcase)
+  */
+  
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
+
       </header>
+      <div>
+        <ProductsCarousel products={products} />
+        <CustomizedSelector />
+        <Button type="primary">Ajouter au panier</Button>
+      </div>
     </div>
   );
 }
