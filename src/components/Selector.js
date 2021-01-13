@@ -1,9 +1,11 @@
+import React from 'react';
 import { Select } from 'antd';
 
-const CustomizedSelector = (props) => {
+const CustomizedSelector = (prop) => {
 
-    const { products } = props
-
+    const { param, title } = (prop);
+    console.log(`Selector title: ${title}`);
+    console.log("Selector datas:", param);
     const { Option } = Select;
 
     function handleChange(value) {
@@ -11,13 +13,10 @@ const CustomizedSelector = (props) => {
     }
 
     return (
-        <Select defaultValue="M" style={{ width: 120 }} onChange={handleChange}>
-            <Option value="XS">XS</Option>
-            <Option value="S">S</Option>
-            <Option value="M">M</Option>
-            <Option value="L">L</Option>
-            <Option value="XL">XL</Option>
-            <Option value="XXL">XXL</Option>
+        <Select defaultValue={title} style={{ width: 120 }} onChange={handleChange}>
+            {param.map((element, index) => (
+                <Option value={element} key={index} >{element}</Option>
+            ))}
         </Select>
     );
 }
