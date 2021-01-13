@@ -12,15 +12,18 @@ import './App.css';
 // import Showcase from './app/showcase.js';
 
 const App = () => {
-
+  const state = {
+    selected: 1,
+    basket: []
+  }
   let serial = 0
-  const products = [
+  const showcase = [
     {
       id: toString(++serial),
       title: "Chemise",
       picture: shirt,
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-      colors: ["Blanc", "Bleu ciel", "Anthracite"]
+      colors: ["Blanc", "Bleu ciel", "Anthracite"],
     },
     {
       id: toString(++serial),
@@ -30,6 +33,8 @@ const App = () => {
       colors: ["Marron", "Noir"]
     }
   ]
+
+  console.log("Selected product:", showcase[state.selected-1])
 
   /* Version avec classes :
   let showcase = new Showcase([
@@ -48,6 +53,12 @@ const App = () => {
   console.log("Showcase", showcase)
   */
   
+  const handleChange = event => {
+    const productId = event.target.value
+    state.setState({selected: productId})
+    console.log("Selected", state.selected)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -55,9 +66,10 @@ const App = () => {
 
       </header>
       <div>
-        <ProductsCarousel products={products} />
-        <CustomizedSelector />
-        <Button type="primary">Ajouter au panier</Button>
+        <ProductsCarousel products={showcase} />
+        <CustomizedSelector  style={{margin: '10px'}} param={showcase[state.selected-1].sizes} title="Taille" />
+        <CustomizedSelector  style={{margin: '10px'}} param={showcase[state.selected-1].colors} title="Couleur" />
+        <Button type="primary"  style={{margin: '10px'}} htmlType='submit'>Ajouter au panier</Button>
       </div>
     </div>
   );
