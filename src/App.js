@@ -4,6 +4,7 @@ import shirt from './assets/shirt.jpg';
 import belt from './assets/belt.jpg';
 import ProductsCarousel from './components/Carousel.js';
 import CustomizedSelector from './components/Selector.js';
+import { InputNumber } from 'antd';
 import { Button } from 'antd';
 import './App.css';
 
@@ -12,8 +13,9 @@ import './App.css';
 // import Showcase from './app/showcase.js';
 
 const App = () => {
-  const state = {
+  let state = {
     selected: 1,
+    quantity: 0,
     basket: []
   }
   let serial = 0
@@ -34,8 +36,6 @@ const App = () => {
     }
   ]
 
-  console.log("Selected product:", showcase[state.selected-1])
-
   /* Version avec classes :
   let showcase = new Showcase([
     new Product(
@@ -52,11 +52,11 @@ const App = () => {
     )])
   console.log("Showcase", showcase)
   */
-  
-  const handleChange = event => {
-    const productId = event.target.value
-    state.setState({selected: productId})
-    console.log("Selected", state.selected)
+ 
+  function onChange(value) {
+    const num = value
+    state.setState({quantity: num})
+    console.log(`Quantity: ${state.quantity}`)
   }
 
   return (
@@ -67,9 +67,10 @@ const App = () => {
       </header>
       <div>
         <ProductsCarousel products={showcase} />
-        <CustomizedSelector  style={{margin: '10px'}} param={showcase[state.selected-1].sizes} title="Taille" />
-        <CustomizedSelector  style={{margin: '10px'}} param={showcase[state.selected-1].colors} title="Couleur" />
-        <Button type="primary"  style={{margin: '10px'}} htmlType='submit'>Ajouter au panier</Button>
+        <CustomizedSelector param={showcase[state.selected-1].sizes} title="Taille" />
+        <CustomizedSelector param={showcase[state.selected-1].colors} title="Couleur" />
+        <InputNumber min={1} defaultValue={1} onChange={onChange} />
+        <Button type="primary" style={{margin: '10px'}} htmlType='submit'>Ajouter au panier</Button>
       </div>
     </div>
   );

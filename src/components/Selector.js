@@ -4,8 +4,6 @@ import { Select } from 'antd';
 const CustomizedSelector = (prop) => {
 
     const { param, title } = (prop);
-    console.log(`Selector title: ${title}`);
-    console.log("Selector datas:", param);
     const { Option } = Select;
 
     function handleChange(value) {
