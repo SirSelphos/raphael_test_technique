@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './assets/logo.png';
 import shirt from './assets/shirt.jpg';
 import belt from './assets/belt.jpg';
@@ -13,12 +13,15 @@ import './App.css';
 // import Showcase from './app/showcase.js';
 
 const App = () => {
-  let state = {
-    selected: 1,
-    quantity: 0,
-    basket: []
-  }
-  let serial = 0
+
+  const [product, setProduct] = useState({
+    id: 1,
+    size: "",
+    color: "",
+    quantity: 0
+  })
+
+  let serial = 0  
   const showcase = [
     {
       id: toString(++serial),
@@ -52,24 +55,26 @@ const App = () => {
     )])
   console.log("Showcase", showcase)
   */
- 
-  function onChange(value) {
-    const num = value
-    state.setState({quantity: num})
-    console.log(`Quantity: ${state.quantity}`)
+
+  const handleChange = event => {
+
+  }
+
+  const onChange = event => {
+
   }
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-
+        
       </header>
       <div>
-        <ProductsCarousel products={showcase} />
-        <CustomizedSelector param={showcase[state.selected-1].sizes} title="Taille" />
-        <CustomizedSelector param={showcase[state.selected-1].colors} title="Couleur" />
-        <InputNumber min={1} defaultValue={1} onChange={onChange} />
+        <ProductsCarousel products={showcase} onChange={handleChange}/>
+        <CustomizedSelector param={showcase[product.id-1].sizes} title="Taille" />
+        <CustomizedSelector param={showcase[product.id-1].colors} title="Couleur" />
+        <InputNumber min={1} defaultValue={1} style={{ height: 32, width: 60 }}onChange={onChange} />
         <Button type="primary" style={{margin: '10px'}} htmlType='submit'>Ajouter au panier</Button>
       </div>
     </div>

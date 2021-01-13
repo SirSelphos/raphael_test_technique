@@ -1,9 +1,9 @@
 import React from 'react';
 import { Select } from 'antd';
 
-const CustomizedSelector = (prop) => {
+const CustomizedSelector = (props) => {
 
-    const { param, title } = (prop);
+    const { param, title } = (props);
     const { Option } = Select;
 
     function handleChange(value) {
