@@ -4,10 +4,6 @@ import { Carousel } from 'antd';
 const ProductsCarousel = (props) => {
 
   const { products } = props
-    
-  function onChange() {
-    
-  }
 
   const contentStyle = {
     height: '500px',
@@ -15,9 +11,9 @@ const ProductsCarousel = (props) => {
   };
 
   return (
-    <Carousel afterChange={onChange}>
+    <Carousel>
       {products.map((product) => (
-        <div  key={product.id} >
+        <div key={product.id} >
           <div style={contentStyle} >
             <img src={product.picture} alt={product.title} />
           </div>          

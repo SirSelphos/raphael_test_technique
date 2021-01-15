@@ -8,60 +8,38 @@ import { InputNumber } from 'antd';
 import { Button } from 'antd';
 import './App.css';
 
-// Version avec classes :
-// import Product from './app/product.js';
-// import Showcase from './app/showcase.js';
-
 const App = () => {
 
-  const [product, setProduct] = useState({
-    id: 1,
-    size: "",
-    color: "",
-    quantity: 0
-  })
+  const [cart, setCart] = useState([""])
 
   let serial = 0  
   const showcase = [
     {
-      id: toString(++serial),
+      id: ++serial,
       title: "Chemise",
       picture: shirt,
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
       colors: ["Blanc", "Bleu ciel", "Anthracite"],
+      quantity: 1
     },
     {
-      id: toString(++serial),
+      id: ++serial,
       title: "Ceinture",
       picture: belt,
       sizes: [36, 38, 40, 42, 44],
-      colors: ["Marron", "Noir"]
+      colors: ["Marron", "Noir"],
+      quantity: 1
     }
   ]
 
-  /* Version avec classes :
-  let showcase = new Showcase([
-    new Product(
-      "Chemise",
-      shirt,
-      ["XS", "S", "M", "L", "XL", "XXL"],
-      ["Blanc", "Bleu ciel", "Anthracite"]
-      ),
-    new Product(
-      "Ceinture",
-      belt,
-      [36, 38, 40, 42, 44],
-      ["Marron", "Noir"]
-    )])
-  console.log("Showcase", showcase)
-  */
-
-  const handleChange = event => {
-
+  const onChange = (value) => {
+    console.log("Value:", value)
   }
 
-  const onChange = event => {
-
+  const handleAdd = (product) => {
+    const newCart = [...cart]
+    newCart.push(product)
+    setCart({ newCart })
   }
 
   return (
@@ -71,11 +49,11 @@ const App = () => {
         
       </header>
       <div>
-        <ProductsCarousel products={showcase} onChange={handleChange}/>
-        <CustomizedSelector param={showcase[product.id-1].sizes} title="Taille" />
-        <CustomizedSelector param={showcase[product.id-1].colors} title="Couleur" />
-        <InputNumber min={1} defaultValue={1} style={{ height: 32, width: 60 }}onChange={onChange} />
-        <Button type="primary" style={{margin: '10px'}} htmlType='submit'>Ajouter au panier</Button>
+        <ProductsCarousel products={showcase} afterChange={onChange} />
+        <CustomizedSelector param={showcase[0].sizes} title="Taille" />
+        <CustomizedSelector param={showcase[0].colors} title="Couleur" />
+        <InputNumber min={1} defaultValue={1} style={{ height: 32, width: 60 }} />
+        <Button type="primary" style={{margin: '10px'}} htmlType='submit' onSubmit={handleAdd}>Ajouter au panier</Button>
       </div>
     </div>
   );
