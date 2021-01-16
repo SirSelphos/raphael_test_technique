@@ -9,59 +9,58 @@ import { InputNumber } from 'antd';
 import { Button } from 'antd';
 import './App.css';
 
-const App = () => {
-
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      size: "",
-      color: "",
-      quantity: 0
-    },
-    [""]
-  ]);
-
-  let serial = 0  
+let serial = 0  
   const showcase = [
     {
       id: ++serial,
       title: "Chemise",
       picture: shirt,
-      sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-      colors: ["Blanc", "Bleu ciel", "Anthracite"],
-      quantity: 1
+      size: ["XS", "S", "M", "L", "XL", "XXL"],
+      color: ["Blanc", "Bleu ciel", "Anthracite"]
     },
     {
       id: ++serial,
       title: "Ceinture",
       picture: belt,
-      sizes: [36, 38, 40, 42, 44],
-      colors: ["Marron", "Noir"],
-      quantity: 1
+      size: [36, 38, 40, 42, 44],
+      color: ["Marron", "Noir"]
     }
   ];
 
-  const onChange = (value) => {
-    console.log("Value:", value)
+const App = () => {
+
+  const [products, setProducts] = useState([]);
+  const [current, setCurrent] = useState({ id: showcase[0].id });
+  const [quantity, setQuantity] = useState({ num: 1});
+
+  const chooseProduct = (index) => {
+    const product = showcase[index]
+    return setCurrent(product)
+  };
+
+  const handleInput = (value) => {  
+    console.log("Quantity:", value)
+    return setQuantity(value)
   };
 
   const handleAdd = (product) => {
-    const newCart = [...products]
-    newCart[1].push(product)
-    setProducts({ newCart })
+    const cart = [...products]
+    cart.push(product)
+    setProducts({ cart })
+    console.log("Cart:", products)
   };
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Cart cart={products[1]} className="Cart" />
+        {/* <Cart cart={products[1]} className="Cart" /> */}
       </header>
       <div>
-        <ProductsCarousel products={showcase} afterChange={onChange} />
-        <CustomizedSelector param={showcase[products[0].id-1].sizes} title="Taille" />
-        <CustomizedSelector param={showcase[products[0].id-1].colors} title="Couleur" />
-        <InputNumber min={1} defaultValue={1} style={{ height: 32, width: 60 }} />
+        <ProductsCarousel products={showcase} handleChange={chooseProduct} />
+        <CustomizedSelector param={showcase[current.id-1].size} title="Taille" />
+        <CustomizedSelector param={showcase[current.id-1].color} title="Couleur" />
+        <InputNumber min={1} defaultValue={1} style={{ height: 32, width: 60 }} onChange={handleInput}/>
         <Button type="primary" style={{margin: '10px'}} htmlType='submit' onSubmit={handleAdd}>Ajouter au panier</Button>
       </div>
     </div>

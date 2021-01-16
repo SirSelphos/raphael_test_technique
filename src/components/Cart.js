@@ -4,7 +4,7 @@ import { Popover, Button } from 'antd';
 const Cart = (props) => {
 
     const { cart } = props
-
+    
     const content = (
         <div>
             {cart[0]!=="" && cart.map((product) => (

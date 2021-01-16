@@ -3,7 +3,7 @@ import { Carousel } from 'antd';
 
 const ProductsCarousel = (props) => {
 
-  const { products } = props
+  const { products, handleChange } = props
 
   const contentStyle = {
     height: '500px',
@@ -11,7 +11,7 @@ const ProductsCarousel = (props) => {
   };
 
   return (
-    <Carousel>
+    <Carousel afterChange={handleChange}>
       {products.map((product) => (
         <div key={product.id} >
           <div style={contentStyle} >
