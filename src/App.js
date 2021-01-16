@@ -35,7 +35,7 @@ const App = () => {
   const [current, setCurrent] = useState({ id: showcase[0].id });
   const [size, setSize] = useState();
   const [color, setColor] = useState();
-  const [quantity, setQuantity] = useState();
+  const [quantity, setQuantity] = useState(1);
 
   const chooseProduct = (index) => {
     const product = showcase[index]
@@ -55,12 +55,23 @@ const App = () => {
   };
 
   const handleAdd = () => {
+    if(size && color){
+      const products = [...cart]
+      const product = {...showcase[current.id-1]}
+      product.size = size
+      product.color = color
+      product.quantity = quantity
+      products.push(product)
+      console.log("Panier ++:", products)
+      return setCart(products)
+    }
+  };
+
+  const handleDelete = id => {
     const products = [...cart]
-    const product = {...showcase[current.id-1]}
-    product.size = size
-    product.color = color
-    product.quantity = quantity
-    products.push(product)
+    const index = products.findIndex(product => product.id === id)
+    products.splice(index, 1)    
+    console.log("Panier --:", products)
     return setCart(products)
   };
 
@@ -69,7 +80,8 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"/>
         <Cart products={cart}
-          className="Cart"/>
+          className="Cart"
+          onClick={handleDelete}/>
       </header>
       <div>
         <ProductsCarousel 

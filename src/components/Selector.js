@@ -8,7 +8,7 @@ const CustomizedSelector = (props) => {
 
     return (
         <Select defaultValue={title} style={{ width: 120 }} onChange={onChange}>
-            {param.map((element, index) => (
+            {param && param.length > 0 && param.map((element, index) => (
                 <Option value={element} key={index} >{element}</Option>
             ))}
         </Select>
