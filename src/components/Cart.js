@@ -7,9 +7,9 @@ const Cart = (props) => {
 
     const content = (
         <div>
-            {cart.map((product) => (
+            {cart[0]!=="" && cart.map((product) => (
                 <div key={product.id} >
-                    <p>{product.title} - {product.size} - {product.color} | {product.quantity}</p>
+                    <p>{product.title} (taille {product.size}, couleur {product.color}) | ({product.quantity}) <Button type="primary">X</Button></p>
                 </div>    
             ))}
         </div>
