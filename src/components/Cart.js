@@ -3,13 +3,18 @@ import { Popover, Button } from 'antd';
 
 const Cart = (props) => {
 
-    const { cart } = props
+    const { products } = props
     
     const content = (
         <div>
-            {cart[0]!=="" && cart.map((product) => (
+            {products.lenght > 0 && products.map((product) => (
                 <div key={product.id} >
-                    <p>{product.title} (taille {product.size}, couleur {product.color}) | ({product.quantity}) <Button type="primary">X</Button></p>
+                    <p>
+                        {product.title} 
+                        (taille {product.size}, couleur {product.color}) | 
+                        ({product.quantity}) 
+                        <Button type="primary">X</Button>
+                    </p>
                 </div>    
             ))}
         </div>
@@ -17,7 +22,7 @@ const Cart = (props) => {
 
     return(
         <Popover content={content} title="Mon panier :">
-            <Button type="primary">Panier ({cart.length})</Button>
+            <Button type="primary">Panier ({products.length})</Button>
         </Popover>
     );
 };

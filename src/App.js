@@ -16,52 +16,86 @@ let serial = 0
       title: "Chemise",
       picture: shirt,
       size: ["XS", "S", "M", "L", "XL", "XXL"],
-      color: ["Blanc", "Bleu ciel", "Anthracite"]
+      color: ["Blanc", "Bleu ciel", "Anthracite"],
+      quantity: 0
     },
     {
       id: ++serial,
       title: "Ceinture",
       picture: belt,
       size: [36, 38, 40, 42, 44],
-      color: ["Marron", "Noir"]
+      color: ["Marron", "Noir"],
+      quantity: 0
     }
   ];
 
 const App = () => {
 
-  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   const [current, setCurrent] = useState({ id: showcase[0].id });
-  const [quantity, setQuantity] = useState({ num: 1});
+  const [size, setSize] = useState();
+  const [color, setColor] = useState();
+  const [quantity, setQuantity] = useState();
 
   const chooseProduct = (index) => {
     const product = showcase[index]
     return setCurrent(product)
   };
 
+  const handleSize = (value) => {
+    return setSize(value)
+  };
+
+  const handleColor = (value) => {
+    return setColor(value)
+  };
+
   const handleInput = (value) => {  
-    console.log("Quantity:", value)
     return setQuantity(value)
   };
 
-  const handleAdd = (product) => {
-    const cart = [...products]
-    cart.push(product)
-    setProducts({ cart })
-    console.log("Cart:", products)
+  const handleAdd = () => {
+    const products = [...cart]
+    const product = showcase[current.id-1]
+    product.size = size
+    product.color = color
+    product.quantity = quantity
+    products.push(product)
+    return setCart(products)
   };
+
+  console.log("Panier:", cart)
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {/* <Cart cart={products[1]} className="Cart" /> */}
+        <img src={logo} className="App-logo" alt="logo"/>
+        <Cart products={cart}
+          className="Cart"/>
       </header>
       <div>
-        <ProductsCarousel products={showcase} handleChange={chooseProduct} />
-        <CustomizedSelector param={showcase[current.id-1].size} title="Taille" />
-        <CustomizedSelector param={showcase[current.id-1].color} title="Couleur" />
-        <InputNumber min={1} defaultValue={1} style={{ height: 32, width: 60 }} onChange={handleInput}/>
-        <Button type="primary" style={{margin: '10px'}} htmlType='submit' onSubmit={handleAdd}>Ajouter au panier</Button>
+        <ProductsCarousel 
+          products={showcase} 
+          handleChange={chooseProduct}/>
+        <CustomizedSelector 
+          param={showcase[current.id-1].size}
+          title="Taille"
+          onChange={handleSize}/>
+        <CustomizedSelector 
+          param={showcase[current.id-1].color}
+          title="Couleur"
+          onChange={handleColor}/>
+        <InputNumber 
+          min={1} 
+          defaultValue={1} 
+          style={{ height: 32, width: 60 }} 
+          onChange={handleInput}/>
+        <Button 
+          type="primary" 
+          style={{margin: '10px'}} 
+          onClick={handleAdd}>
+          Ajouter au panier
+        </Button>
       </div>
     </div>
   );
