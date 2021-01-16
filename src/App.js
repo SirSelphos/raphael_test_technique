@@ -10,24 +10,24 @@ import { Button } from 'antd';
 import './App.css';
 
 let serial = 0  
-  const showcase = [
-    {
-      id: ++serial,
-      title: "Chemise",
-      picture: shirt,
-      size: ["XS", "S", "M", "L", "XL", "XXL"],
-      color: ["Blanc", "Bleu ciel", "Anthracite"],
-      quantity: 0
-    },
-    {
-      id: ++serial,
-      title: "Ceinture",
-      picture: belt,
-      size: [36, 38, 40, 42, 44],
-      color: ["Marron", "Noir"],
-      quantity: 0
-    }
-  ];
+const showcase = [
+  {
+    id: ++serial,
+    title: "Chemise",
+    picture: shirt,
+    size: ["XS", "S", "M", "L", "XL", "XXL"],
+    color: ["Blanc", "Bleu ciel", "Anthracite"],
+    quantity: 0
+  },
+  {
+    id: ++serial,
+    title: "Ceinture",
+    picture: belt,
+    size: [36, 38, 40, 42, 44],
+    color: ["Marron", "Noir"],
+    quantity: 0
+  }
+];
 
 const App = () => {
 
@@ -56,15 +56,13 @@ const App = () => {
 
   const handleAdd = () => {
     const products = [...cart]
-    const product = showcase[current.id-1]
+    const product = {...showcase[current.id-1]}
     product.size = size
     product.color = color
     product.quantity = quantity
     products.push(product)
     return setCart(products)
   };
-
-  console.log("Panier:", cart)
 
   return (
     <div className="App">

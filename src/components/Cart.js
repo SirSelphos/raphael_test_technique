@@ -7,13 +7,10 @@ const Cart = (props) => {
     
     const content = (
         <div>
-            {products.lenght > 0 && products.map((product) => (
+            {products && products.length > 0 && products.map((product) => (
                 <div key={product.id} >
-                    <p>
-                        {product.title} 
-                        (taille {product.size}, couleur {product.color}) | 
-                        ({product.quantity}) 
-                        <Button type="primary">X</Button>
+                    <p>                        
+                        {product.title} : taille {product.size}, couleur {product.color} ({product.quantity}) <Button type="primary">X</Button>                   
                     </p>
                 </div>    
             ))}
