@@ -13,6 +13,6 @@ const CustomizedSelector = (props) => {
             ))}
         </Select>
     );
-}
+};
 
 export default CustomizedSelector;

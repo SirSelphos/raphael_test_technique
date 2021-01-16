@@ -21,6 +21,6 @@ const ProductsCarousel = (props) => {
       ))}
     </Carousel>
   );
-}
+};
 
 export default ProductsCarousel;
