@@ -81,6 +81,7 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"/>
         <Cart 
+          className="Cart"
           orders={cart}
           onClick={handleDelete}/>
       </header>
@@ -97,13 +98,13 @@ const App = () => {
           title="Couleur"
           onChange={handleColor}/>
         <InputNumber 
-          min={1} 
-          defaultValue={1} 
           style={{ height: '32px', width: '60px' }} 
+          min={1} 
+          defaultValue={1}
           onChange={handleInput}/>
         <Button 
-          type="primary" 
           style={{margin: '10px'}} 
+          type="primary"          
           onClick={handleAdd}>
           Ajouter au panier
         </Button>

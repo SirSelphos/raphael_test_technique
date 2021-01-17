@@ -7,7 +7,8 @@ const ProductsCarousel = (props) => {
 
   const contentStyle = {
     height: '500px',
-    background: '#364d79'
+    background: '#364d79',
+    selfAlign: 'center'
   };
 
   return (
