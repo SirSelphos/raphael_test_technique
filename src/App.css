@@ -19,6 +19,10 @@
   font-size: calc(10px + 2vmin);
 }
 
-.Basket {
-  float: right;
+@media screen and (max-width: 769px) and (min-width:680px) {
+
+}
+
+@media screen and (max-width: 679px) {
+  
 }
