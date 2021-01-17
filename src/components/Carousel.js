@@ -13,9 +13,9 @@ const ProductsCarousel = (props) => {
   return (
     <Carousel afterChange={handleChange}>
       {products && products.length > 0 && products.map((product) => (
-        <div key={product.id} >
+        <div key={product.id}>
           <div style={contentStyle} >
-            <img src={product.picture} alt={product.title} />
+            <img src={product.picture} alt={product.title}/>
           </div>          
         </div>    
       ))}

@@ -16,7 +16,7 @@ const showcase = [
     title: "Chemise",
     picture: shirt,
     size: ["XS", "S", "M", "L", "XL", "XXL"],
-    color: ["Blanc", "Bleu ciel", "Anthracite"],
+    color: ["Blanc", "Crème", "Bleu-ciel", "Anthracite"],
     quantity: 0
   },
   {
@@ -24,7 +24,7 @@ const showcase = [
     title: "Ceinture",
     picture: belt,
     size: [36, 38, 40, 42, 44],
-    color: ["Marron", "Noir"],
+    color: ["Marron", "Gris", "Noir"],
     quantity: 0
   }
 ];
@@ -58,6 +58,7 @@ const App = () => {
     if(size && color){
       const products = [...cart]
       const product = {...showcase[current.id-1]}
+      product.id = ++serial
       product.size = size
       product.color = color
       product.quantity = quantity
@@ -79,8 +80,8 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo"/>
-        <Cart products={cart}
-          className="Cart"
+        <Cart 
+          orders={cart}
           onClick={handleDelete}/>
       </header>
       <div>
@@ -98,7 +99,7 @@ const App = () => {
         <InputNumber 
           min={1} 
           defaultValue={1} 
-          style={{ height: 32, width: 60 }} 
+          style={{ height: '32px', width: '60px' }} 
           onChange={handleInput}/>
         <Button 
           type="primary" 
